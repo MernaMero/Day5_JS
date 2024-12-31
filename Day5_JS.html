@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Day 5 - JavaScript Assignments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .task {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-left: 4px solid #007BFF;
+            border-radius: 4px;
+        }
+        .task h2 {
+            color: #007BFF;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-left: 4px solid #28a745;
+            border-radius: 4px;
+        }
+        .divider {
+            border-top: 2px solid #007BFF;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Day 5 - JavaScript Assignments</h1>
+
+        <!-- Task 1: Palindrome Check -->
+        <div class="task">
+            <h2>Task 1: Palindrome Check</h2>
+            <label for="palindromeInput">Enter a string:</label>
+            <input type="text" id="palindromeInput" placeholder="Enter a string">
+            <label>
+                <input type="checkbox" id="caseSensitive"> Case sensitive
+            </label>
+            <button onclick="checkPalindrome()">Check</button>
+            <div id="palindromeResult" class="result"></div>
+        </div>
+        <div class="divider"></div>
+
+        <!-- Task 2: Count 'e' Characters -->
+        <div class="task">
+            <h2>Task 2: Count 'e' Characters</h2>
+            <label for="countEInput">Enter a string:</label>
+            <input type="text" id="countEInput" placeholder="Enter a string">
+            <button onclick="countE()">Count 'e'</button>
+            <div id="countEResult" class="result"></div>
+        </div>
+        <div class="divider"></div>
+
+        <!-- Task 3: User Info Validation -->
+        <div class="task">
+            <h2>Task 3: User Info Validation</h2>
+            <button onclick="getUserInfo()">Enter Your Info</button>
+            <div id="userInfoResult" class="result"></div>
+        </div>
+        <div class="divider"></div>
+
+        <!-- Task 4: Calculate Circle Area -->
+        <div class="task">
+            <h2>Task 4: Calculate Circle Area</h2>
+            <label for="radiusInput">Enter the radius of the circle:</label>
+            <input type="number" id="radiusInput" placeholder="Enter radius">
+            <button onclick="calculateArea()">Calculate Area</button>
+            <div id="areaResult" class="result"></div>
+        </div>
+        <div class="divider"></div>
+
+        <!-- Task 5: Calculate Square Root -->
+        <div class="task">
+            <h2>Task 5: Calculate Square Root</h2>
+            <label for="sqrtInput">Enter a number:</label>
+            <input type="number" id="sqrtInput" placeholder="Enter a number">
+            <button onclick="calculateSqrt()">Calculate Square Root</button>
+            <div id="sqrtResult" class="result"></div>
+        </div>
+    </div>
+
+    <script>
+        // Task 1: Palindrome Check
+        function checkPalindrome() {
+            const input = document.getElementById('palindromeInput').value;
+            const caseSensitive = document.getElementById('caseSensitive').checked;
+            let str = input;
+
+            if (!caseSensitive) {
+                str = str.toLowerCase();
+            }
+
+            const reversedStr = str.split('').reverse().join('');
+            const isPalindrome = str === reversedStr;
+
+            document.getElementById('palindromeResult').innerHTML = isPalindrome
+                ? `"${input}" is a palindrome!`
+                : `"${input}" is not a palindrome.`;
+        }
+
+        // Task 2: Count 'e' Characters
+        function countE() {
+            const input = document.getElementById('countEInput').value;
+            const count = (input.match(/e/gi) || []).length;
+            document.getElementById('countEResult').innerHTML = `Number of 'e' characters: ${count}`;
+        }
+
+        // Task 3: User Info Validation
+        function getUserInfo() {
+            const name = prompt("Enter your name:");
+            const age = prompt("Enter your age:");
+            const email = prompt("Enter your email:");
+
+            if (name && age && email) {
+                document.getElementById('userInfoResult').innerHTML = `
+                    <strong>Welcome, ${name}!</strong><br>
+                    Age: ${age}<br>
+                    Email: ${email}
+                `;
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+
+        // Task 4: Calculate Circle Area
+        function calculateArea() {
+            const radius = parseFloat(document.getElementById('radiusInput').value);
+            if (isNaN(radius) || radius <= 0) {
+                alert("Please enter a valid positive number for the radius.");
+                return;
+            }
+            const area = Math.PI * Math.pow(radius, 2);
+            document.getElementById('areaResult').innerHTML = `Area of the circle: ${area.toFixed(2)}`;
+        }
+
+        // Task 5: Calculate Square Root
+        function calculateSqrt() {
+            const number = parseFloat(document.getElementById('sqrtInput').value);
+            if (isNaN(number) || number < 0) {
+                alert("Please enter a valid non-negative number.");
+                return;
+            }
+            const sqrt = Math.sqrt(number);
+            alert(`Square root of ${number} is: ${sqrt.toFixed(2)}`);
+        }
+    </script>
+</body>
+</html>
